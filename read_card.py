@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+'''
+read_card.py
+Opens the FITS file, takes card_name and a list of FITS files as
+the arguments to the script, prints the card name and card value
+for all of the files in the file list.
+'''
+
 import sys
 from astropy.io import fits
 
@@ -11,7 +19,7 @@ def read_card_value(card_name, fits_filename):
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python script.py card_name fits_file1.fits fits_file2.fits ...")
+        print("Usage: python3 read_card.py card_name fits_file1.fits fits_file2.fits ...")
         sys.exit(1)
 
     card_name = sys.argv[1]
