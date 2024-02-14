@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+'''
+read_btp.py
+history: 2/12/2024
+author: george loyer
+description: opens a FITS file, reads the BTP card,
+prints the BTP value.
+'''
 import sys
 from astropy.io import fits
 
@@ -11,7 +19,7 @@ def read_btp_card(fits_filename):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python script.py fits_file1.fits fits_file2.fits ...")
+        print("Usage: python3 read_btp.py fits_file1.fits fits_file2.fits ...")
         sys.exit(1)
 
     fits_files = sys.argv[1:]
