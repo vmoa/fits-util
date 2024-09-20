@@ -6,17 +6,19 @@ Author: George Loyer
 
 Accepts three user inputs:
   a list of space-delimited FITS header card names
+     Examples: EXPTIME AIRMASS OBJECT FILTER DATE-OBS
   a list of space-delimited filenames that are wildcard expanded
   the output file name
 
-After user input is read in main(), lists are created for the
+A card name in a FITS file is a single record on a line.
+After user input is read, list objects are created for the
 card names and file names, and the output file is opened.
 The card names are used as the text of the header line in the
 output file, comma-delimited. Then the read_card_values()
-function is executed once for each file and the card values
-are output to the output file, comma delimited. When the
-program is complete, the output file is a CSV file that can
-be read by Excel for additional review and analysis.
+function is executed once for each file and the file name and
+card values are output to the output file, comma delimited.
+When the program is complete, the output file is a CSV file
+that can be read by Excel for additional review and analysis.
 '''
 
 import sys
@@ -46,11 +48,11 @@ def main():
 
     # Print header line
     with open(output_file, 'w') as output_file_handle:
-        output_file_handle.write(", ".join(card_names) + "\n")
+        output_file_handle.write("FILENAME, " + ", ".join(card_names) + "\n")
 
         for fits_file in fits_files:
             result = read_card_values(card_names, fits_file)
-            output_file_handle.write(result + "\n")
+            output_file_handle.write(fits_file + ", " + result + "\n")
 
 if __name__ == "__main__":
     main()
