@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import sys
+from astropy.io import fits
+
+def print_fits_headers(fits_file):
+    """Print all headers in a FITS file."""
+    try:
+        with fits.open(fits_file) as hdul:
+            for i, hdu in enumerate(hdul):
+                print(f"\n=== HDU {i} ({hdu.__class__.__name__}) ===")
+                print(repr(hdu.header))  # Print the full header
+    except Exception as e:
+        print(f"Error reading FITS file: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <fits_file>")
+        sys.exit(1)
+
+    fits_filename = sys.argv[1]
+    print_fits_headers(fits_filename)
+
